@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="rosserial_python" name="rosserial" type = "serial_node.py" 
+    args="/dev/ttyUSB0"/>
+    
+    <node pkg="orion" name="orion_core" type="orion_core.py"/>
+</launch>
