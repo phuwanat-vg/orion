@@ -1,0 +1,15 @@
+<launch>
+  
+    <!-- Run dynamic reconfigure server -->
+    <node pkg = "orion" type="color_picker_server.py" name = "color_picker_server_node" />
+    
+      <!-- Run color picker client -->
+    <node pkg = "orion" type="color_picker.py" name = "color_picker" />
+    
+      <!-- Run rqt_reconfigure node -->
+    <node pkg = "rqt_reconfigure" type="rqt_reconfigure" name = "rqt_reconfigure" />
+  
+
+    
+    
+</launch>
