@@ -17,15 +17,21 @@ void turnWheel( const std_msgs::Float32 &wheel_power,
                 unsigned int dir2_pin) {
     float factor = max(min(wheel_power.data, 1.0f), -1.0f);
     //Serial.print(wheel_power.data);
-    if( factor >= 0 ) {
+    if( factor > 0 ) {
         digitalWrite(dir1_pin, LOW);
         digitalWrite(dir2_pin, HIGH);  
         analogWrite(pwm_pin, (unsigned int)(255 * factor));
-    } else {
+    } else if (factor<0)  {
         digitalWrite(dir1_pin, HIGH);
         digitalWrite(dir2_pin, LOW);
         analogWrite(pwm_pin, (unsigned int)(255 * (-1.0f * factor)));
-    }   
+    } 
+    else{
+        digitalWrite(dir1_pin, LOW);
+        digitalWrite(dir2_pin, LOW);
+        analogWrite(pwm_pin,0);
+    } 
+   
 }
 
 void rightWheelCb( const std_msgs::Float32 &wheel_power ) {
