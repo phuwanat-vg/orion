@@ -7,7 +7,7 @@ import numpy as np
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Twist
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import Image
 import dynamic_reconfigure.client
 
 
@@ -15,7 +15,7 @@ class Picker(object):
 
     def __init__(self):
         self.bridge = CvBridge()
-        self.image_sub = rospy.Subscriber("/raspicam_node/image/compressed",CompressedImage, self.camera_callback)
+        self.image_sub = rospy.Subscriber("/usb_cam/image_raw",Image, self.camera_callback)
         print(" << Subscribe image from camera")
         self.hue_l=29
         self.hue_h=330
@@ -28,7 +28,7 @@ class Picker(object):
     def camera_callback(self,data):
         
         try:
-            cv_image=self.bridge.compressed_imgmsg_to_cv2(data,"bgr8")
+            cv_image=self.bridge.imgmsg_to_cv2(data,"bgr8")
           
         except CvBridgeError as e:
             print(e)
